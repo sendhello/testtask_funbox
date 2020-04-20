@@ -11,23 +11,23 @@ def test_app(app):
 
 def test_visited_links(client):
     data = """
-    {
-        "links": [
-            "https://ya.ru",
-            "https://ya.ru?q=123",
-            "funbox.ru",
-            "https://stackoverflow.ru/questions/11828270/how-to-exit-the-vim-editor"
-        ]
-    }
-    """
+        {
+            "links": [
+                "https://ya.ru",
+                "https://ya.ru?q=123",
+                "funbox.ru",
+                "https://stackoverflow.ru/questions/11828270/how-to-exit-the-vim-editor"
+            ]
+        }
+        """
     response = client.post(url_for('visited_links'), content_type='application/json', data=data)
     assert response.status_code == 201
     assert response.json == {'status': 'ok'}
 
 
 def test_visited_domains(client):
-    timestamp_to = int(datetime.timestamp(datetime.now()))
-    timestamp_from = timestamp_to - 60
+    timestamp_to = int(datetime.timestamp(datetime.now())) + 5
+    timestamp_from = timestamp_to - 10
     url = f'{url_for("visited_domains")}?&from={timestamp_from}&to={timestamp_to}'
     response = client.get(url)
     assert response.status_code == 200
