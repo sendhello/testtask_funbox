@@ -50,5 +50,10 @@ def not_found(error):
     return make_response(jsonify({'status': f'error: {error}'}), 405)
 
 
+@app.errorhandler(500)
+def internal_error(error):
+    return make_response(jsonify({'status': f'error: {error}'}), 500)
+
+
 if __name__ == '__main__':
     app.run()
