@@ -10,3 +10,4 @@ class Config(object):
     REDIS_DB = 0
     REDIS_CHAESET = "utf-8"
     REDIS_DECODE_RESPONSES = True
+    KEY_PREFIX = "domains"
